@@ -112,3 +112,7 @@ scratch/
 .parcel-cache/
 .next/
 out/
+
+# ── Document Deliverables & PDFs ──
+*.pdf
+docs/pdf/
