@@ -37,7 +37,9 @@ jobs:
 
       - name: Run Pytest
         working-directory: backend
-        run: pytest tests
+        env:
+          PYTHONPATH: .
+        run: python -m pytest tests
 
   lint-frontend:
     name: Frontend Lint & Typecheck
