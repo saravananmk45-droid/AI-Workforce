@@ -1,6 +1,6 @@
 import asyncio
-from logging.config import fileConfig
 import os
+from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import pool
@@ -14,11 +14,12 @@ if config.config_file_name is not None:
 
 target_metadata = None
 
+
 def get_url():
     return os.getenv(
-        "DATABASE_URL",
-        "postgresql+asyncpg://aiwf_user:dev_password_123@localhost:5432/aiwf_dev"
+        "DATABASE_URL", "postgresql+asyncpg://aiwf_user:dev_password_123@localhost:5432/aiwf_dev"
     ).replace("postgresql://", "postgresql+asyncpg://")
+
 
 def run_migrations_offline() -> None:
     url = get_url()
@@ -32,11 +33,13 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
+
 def do_run_migrations(connection: Connection) -> None:
     context.configure(connection=connection, target_metadata=target_metadata)
 
     with context.begin_transaction():
         context.run_migrations()
+
 
 async def run_async_migrations() -> None:
     configuration = config.get_section(config.config_ini_section) or {}
@@ -52,8 +55,10 @@ async def run_async_migrations() -> None:
 
     await connectable.dispose()
 
+
 def run_migrations_online() -> None:
     asyncio.run(run_async_migrations())
+
 
 if context.is_offline_mode():
     run_migrations_offline()
