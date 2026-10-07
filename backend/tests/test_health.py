@@ -9,7 +9,7 @@ from app.main import app
 client = TestClient(app)
 
 
-def test_root_discovery():
+def test_root_discovery() -> None:
     response = client.get("/")
     assert response.status_code == 200
     data = response.json()
@@ -18,7 +18,7 @@ def test_root_discovery():
     assert data["docs"] == "/docs"
 
 
-def test_liveness_health():
+def test_liveness_health() -> None:
     response = client.get("/v1/healthz")
     assert response.status_code == 200
     data = response.json()
@@ -26,14 +26,14 @@ def test_liveness_health():
     assert data["services"]["api"] == "UP"
 
 
-def test_readiness_probe():
+def test_readiness_probe() -> None:
     response = client.get("/v1/healthz/ready")
     assert response.status_code == 200
     data = response.json()
     assert data["status"] == "READY"
 
 
-def test_openapi_spec_availability():
+def test_openapi_spec_availability() -> None:
     response = client.get("/v1/openapi.json")
     assert response.status_code == 200
     data = response.json()
