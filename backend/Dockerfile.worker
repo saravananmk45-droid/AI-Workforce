@@ -1,0 +1,13 @@
+FROM python:3.11-slim-bookworm
+
+WORKDIR /worker
+RUN groupadd -g 10001 appgroup && \
+    useradd -u 10001 -g appgroup -s /bin/false -m appuser
+
+COPY requirements-worker.txt .
+RUN pip install --no-cache-dir -r requirements-worker.txt
+
+COPY --chown=appuser:appgroup ./app /worker/app
+
+USER appuser
+ENTRYPOINT ["celery", "-A", "app.worker", "worker", "--loglevel=INFO", "--concurrency=4"]

@@ -1,0 +1,28 @@
+[project]
+name = "ai-workforce-backend"
+version = "1.0.0"
+description = "Autonomous Business Workflow Automation Platform — Core Backend"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Saravanan MK", email = "saravananmk45@gmail.com" }
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "A", "C4", "T20", "RET", "SIM", "ARG"]
+ignore = ["B008"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
